@@ -1,0 +1,46 @@
+<html>
+  <body>
+    <div id="app-4">
+        <h1>{{header}}</h1>
+        <input v-model="header">
+        <ol>
+        <!-- Create an instance of the todo-item component -->
+            <todo-item v-for="item in items" ></todo-item>
+        </ol>
+        <button v-on:click="funcion">Agregar mas label-input</button>
+        <label-input v-for="field in fields" ></label-input>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        // Define a new component called todo-item
+        Vue.component('todo-item', {
+            props : ['todo','name'],
+            template: '<li> <input type="text"> </li>'
+        });
+
+        Vue.component('label-input',{
+            props : ['name'],
+            template:'<div><label>Ingresa dato</label><br><input type="text"></div>'
+        });
+
+        var app4 = new Vue({
+            el: '#app-4',
+            data:{
+                header:'hola',
+                items:[
+                    {name:'marcos1',post:'Hello1'},
+                ],
+                fields:[
+                    {name:'name_input'}
+                ]
+            },
+            methods:{
+                funcion:function (event){
+                    this.fields.push({name:'marcos1',post:'Hello1'})
+                }
+            }
+        });
+        
+    </script>
+  </body>
+</html>
