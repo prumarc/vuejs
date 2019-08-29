@@ -9,7 +9,7 @@
             <todo-item v-for="item in items" ></todo-item>
         </ol>
         <button v-on:click="funcion">Agregar mas label-input</button>
-        <label-input v-for="field in fields" v-bind:voltaje="field.voltaje" v-bind:litros="field.litros"></label-input>
+        <label-input v-bind:fields="fields"></label-input>
         <button v-on:click="guardar">Guardar valores</button>
     </div>
     <script src="https://unpkg.com/vue"></script>
@@ -21,8 +21,8 @@
         });
 
         Vue.component('label-input',{
-            props : ['voltaje','litros'],
-            template:'<div><label>Ingresa dato</label><br><input :value="voltaje" type="text" name="voltaje[]"><input :value="litros" type="text" name="litros[]"></div>'
+            props : ['fields'],
+            template:'<div><div v-for="field in fields"><input type="text" v-model="field.litros"></div></div>',
         });
 
         var app4 = new Vue({
