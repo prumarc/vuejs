@@ -2,6 +2,7 @@
   <body>
     <div id="app-4">
         <h1>{{header}}</h1>
+        <h2>{{message}}</h2>
         <input v-model="header">
         <ol>
         <!-- Create an instance of the todo-item component -->
@@ -30,14 +31,33 @@
                 items:[
                     {name:'marcos1',post:'Hello1'},
                 ],
-                fields:[
-                    {name:'name_input'}
-                ]
+                fields:[{name:'test'}]
             },
             methods:{
                 funcion:function (event){
                     this.fields.push({name:'marcos1',post:'Hello1'})
                 }
+            },
+            created:function(){
+                alert('created')
+            },
+            computed:{
+                message: function(){
+                    return 'marcos 123';
+                }
+            },
+            mounted:function(){
+                self = this;
+                fetch("http://localhost:4000/getdata")
+                    .then(function(response){
+                        return response.json();
+                    })
+                    .then(function(data){
+                        console.log(self.fields)
+                        self.fields = data;
+                        console.log('marcos')
+                        console.log(self.fields)
+                    })
             }
         });
         

@@ -13,6 +13,10 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/index.html'));
 });
+
+app.get('/getdata', (req, res) => {
+    res.json([{name: 1}, {name: 2}, {name: 3}]);
+});
  
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
