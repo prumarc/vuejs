@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/getdata', (req, res) => {
-    res.json([{name: 1}, {name: 2}, {name: 3}]);
+    res.json([{voltaje: 0, litros:20}, {voltaje: 2, litros:40}, {voltaje: 3, litros:100}]);
 });
  
 const port = process.env.PORT || 4000;
