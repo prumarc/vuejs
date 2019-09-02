@@ -4,6 +4,13 @@
         <h1>{{header}}</h1>
         <h2>{{message}}</h2>
         <input v-model="header">
+
+        <select-form v-if="showSelect" v-bind:options="options"></select-form>
+
+        <div v-if="showSelect">
+            
+        </div>
+
         <ol>
         <!-- Create an instance of the todo-item component -->
             <todo-item v-for="item in items" ></todo-item>
@@ -14,8 +21,21 @@
     </div>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/x-template" id="select-template">
+        <div>
+            <select>
+                <option v-for="option in options" v-bind:value="option.value">{{option.text}}</option>
+                
+            </select>
+        </div>
+    </script>
     <script>
         // Define a new component called todo-item
+        Vue.component('select-form', {
+            template:'#select-template',
+            props:['options']
+        });
+
         Vue.component('todo-item', {
             props : ['todo','name'],
             template: '<li> <input type="text"> </li>'
@@ -33,7 +53,13 @@
                 items:[
                     {name:'marcos1',post:'Hello1'},
                 ],
-                fields:[]
+                fields:[],
+                showSelect: true,
+                options:[
+                    {value:1, text:'opcion 1'},
+                    {value:2, text:'opcion 2'},
+                ],
+                identificador: 'sensor1'
             },
             methods:{
                 funcion:function (event){
