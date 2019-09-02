@@ -13,6 +13,7 @@
         <button v-on:click="guardar">Guardar valores</button>
     </div>
     <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         // Define a new component called todo-item
         Vue.component('todo-item', {
@@ -53,11 +54,12 @@
             },
             mounted:function(){
                 self = this;
-                fetch("http://localhost:4000/getdata")
+                axios.get("http://localhost:4000/getdata")
                     .then(function(response){
-                        return response.json();
+                        return response.data;
                     })
                     .then(function(data){
+                        console.log(data)
                         self.fields = data;
                     })
             }
