@@ -1,6 +1,8 @@
 <html>
   <body>
     <div id="app-4">
+        <input type="text" ref="test">
+        <button v-on:click="tesRef">Test Ref</button>
         <h1>{{header}}</h1>
         <h2>{{message}}</h2>
         <input v-model="header">
@@ -18,15 +20,27 @@
         <button v-on:click="funcion">Agregar mas label-input</button>
         <label-input v-bind:fields="fields"></label-input>
         <button v-on:click="guardar">Guardar valores</button>
+        <li v-for="n in 10" ref="numbers">{{ n }}</li>
+        <select>
+                <option v-for="option in options" v-bind:value="option.value" ref="option">{{option.text}}</option>
+                
+            </select>
     </div>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/x-template" id="select-template">
         <div>
             <select>
-                <option v-for="option in options" v-bind:value="option.value">{{option.text}}</option>
+                <option v-for="option in options" v-bind:value="option.value" ref="option">{{option.text}}</option>
                 
             </select>
+        </div>
+    </script>
+    <script type="text/x-template" id="test-ref">
+        <div>
+            <div v-for="(field, index) in fields">
+                <input ref="field.litros" type="text" v-model="field.litros">
+            </div>
         </div>
     </script>
     <script>
@@ -43,7 +57,7 @@
 
         Vue.component('label-input',{
             props : ['fields'],
-            template:'<div><div v-for="field in fields"><input type="text" v-model="field.litros"></div></div>',
+            template:'#test-ref',
         });
 
         var app4 = new Vue({
@@ -68,6 +82,9 @@
                 guardar:function(event){
                     console.log('guardando')
                     console.log(this.fields)
+                },
+                tesRef:function(){
+                    console.log(this.$refs);
                 }
             },
             created:function(){
